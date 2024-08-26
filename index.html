@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PDF Compression Tool</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        form {
+            background-color: #f0f0f0;
+            padding: 20px;
+            border-radius: 5px;
+        }
+        input[type="file"], select, input[type="submit"] {
+            margin: 10px 0;
+        }
+        .message {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #e0e0e0;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>PDF Compression Tool</h1>
+    <form action="process.php" method="post" enctype="multipart/form-data">
+        <label for="pdfFile">Select PDF file:</label><br>
+        <input type="file" name="pdfFile" id="pdfFile" accept=".pdf" required><br>
+        
+        <label for="quality">Compression Quality:</label><br>
+        <select name="quality" id="quality">
+            <option value="screen">Screen</option>
+            <option value="ebook">Ebook</option>
+            <option value="printer">Printer</option>
+            <option value="prepress">Prepress</option>
+        </select><br>
+        
+        <input type="submit" value="Compress PDF">
+    </form>
+
+    <div id="message" class="message" style="display: none;"></div>
+
+    <script>
+        // Check if there's a message in the URL (e.g., from a redirect)
+        const urlParams = new URLSearchParams(window.location.search);
+        const message = urlParams.get('message');
+        if (message) {
+            document.getElementById('message').innerHTML = decodeURIComponent(message);
+            document.getElementById('message').style.display = 'block';
+        }
+    </script>
+</body>
+</html>
